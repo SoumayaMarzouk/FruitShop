@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Fruits } from '../fruits';
-import { FruitsService } from '../fruits.service';
+
+import { Fruits } from '../../fruits/fruits';
+import { CategoryService } from '../category.service';
+import { Category } from '../category';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -12,16 +14,15 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './edit.component.css'
 })
 export class EditComponent {
-  fruitForm: Fruits = {
+  catForm: Category = {
     id: 0,
     name: '',
-    price: 0,
-    quantity: 0,
+    description: '',
   };
   constructor(
     private route: ActivatedRoute,
     private router:Router,
-    private fruitService: FruitsService
+    private service: CategoryService
   ) {}
 
   ngOnInit(): void {
@@ -32,16 +33,16 @@ export class EditComponent {
   }
  
   getById(id: number) {
-    this.fruitService.getById(id).subscribe((data) => {
-      this.fruitForm = data;
+    this.service.getById(id).subscribe((data) => {
+      this.catForm = data;
     });
   }
   update() {
-    console.log(this.fruitForm);
-    this.fruitService.update(this.fruitForm)
+    console.log(this.catForm);
+    this.service.update(this.catForm)
     .subscribe({
       next:(data) => {
-        this.router.navigate(["/fruits/home"]);
+        this.router.navigate(["/category/home"]);
       },
       error:(err) => {
         console.log(err);

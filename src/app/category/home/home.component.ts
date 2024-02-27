@@ -1,28 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { FruitsService } from '../fruits.service';
-import { Fruits } from '../fruits';
-import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { Category } from '../category';
+import { CategoryService } from '../category.service';
 import { RouterModule } from '@angular/router';
-//import { HttpClient } from '@angular/common/http';
-
-
-
 declare var window: any;
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule,RouterModule],
+  imports: [RouterModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit{
-  allFruits:Fruits[]=[];
+export class HomeComponent {
+ 
+  allCat:Category[]=[];
 
   deleteModal: any;
   idTodelete: number = 0;
 
-  constructor(private service:FruitsService){}
+  constructor(private service:CategoryService){}
   ngOnInit(): void {
 
     this.deleteModal = new window.bootstrap.Modal(document.getElementById('deleteModal')
@@ -32,7 +28,7 @@ export class HomeComponent implements OnInit{
   }
   get() {
     this.service.get().subscribe((data) => {
-      this.allFruits = data;
+      this.allCat = data;
     });
 
   }
@@ -44,7 +40,7 @@ export class HomeComponent implements OnInit{
   delete() {
     this.service.delete(this.idTodelete).subscribe({
       next: (data) => {console.log(this.idTodelete)
-        this.allFruits = this.allFruits.filter(_ => _.id != this.idTodelete)
+        this.allCat = this.allCat.filter(_ => _.id != this.idTodelete)
         this.deleteModal.hide();
       },
     });

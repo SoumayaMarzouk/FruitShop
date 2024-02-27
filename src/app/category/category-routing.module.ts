@@ -1,27 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
 import { CreateComponent } from './create/create.component';
 import { EditComponent } from './edit/edit.component';
-import { HomeComponent } from './home/home.component';
 
-export const froutes: Routes = [
-  { path: '',   redirectTo: 'fruits/home', pathMatch: 'full' },
+const routes: Routes = [
   {
-    path: 'fruits/home',
+    path: 'home',
     component: HomeComponent,
   },
   {
-    path: 'fruits/create',
+    path: 'create',
     component: CreateComponent,
   },
   {
-    path:'fruits/edit/:id',
+    path:'edit/:id',
     component: EditComponent
   }
 ];
 
+
 @NgModule({
-  imports: [RouterModule.forChild(froutes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class FruitsRoutingModule { }
+export class CategoryRoutingModule { }

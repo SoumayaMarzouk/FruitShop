@@ -3,6 +3,7 @@ import { Fruits } from '../fruits';
 import { FruitsService } from '../fruits.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-create',
@@ -30,7 +31,7 @@ export class CreateComponent implements OnInit {
       this.fruitService.create(this.fruitForm)
       .subscribe({
         next:(data) => {
-          console.log(data);this.router.navigate(["/"])
+          console.log(data);this.router.navigate(["/fruits/home"])
         },
         error:(err) => {
           console.log(err);
